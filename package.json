@@ -1,0 +1,33 @@
+{
+  "name": "sauce-cli",
+  "version": "1.0.0",
+  "description": "Sauce CLI",
+  "main": "bin/index.js",
+  "bin": {
+    "sauce-cli": "./bin/index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ay86/sauce-cli.git"
+  },
+  "keywords": [
+    "sauce"
+  ],
+  "author": "AngusYoung",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ay86/sauce-cli/issues"
+  },
+  "homepage": "https://github.com/ay86/sauce-cli#readme",
+  "dependencies": {
+    "commander": "^2.19.0",
+    "console-colors-node": "^1.0.1",
+    "download-git-repo": "^1.1.0",
+    "inquirer": "^6.2.2",
+    "ora": "^3.1.0",
+    "shelljs": "^0.8.3"
+  }
+}
