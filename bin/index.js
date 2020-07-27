@@ -16,7 +16,14 @@ const spinner = require('ora')();
 
 require('console-colors-node');
 
-console.log('====== Sauce ======'.green.bold);
+console.log(`
+ ______     ______     __  __     ______     ______    
+/\\  ___\\   /\\  __ \\   /\\ \\/\\ \\   /\\  ___\\   /\\  ___\\   
+\\ \\___  \\  \\ \\  __ \\  \\ \\ \\_\\ \\  \\ \\ \\____  \\ \\  __\\   
+ \\/\\_____\\  \\ \\_\\ \\_\\  \\ \\_____\\  \\ \\_____\\  \\ \\_____\\ 
+  \\/_____/   \\/_/\\/_/   \\/_____/   \\/_____/   \\/_____/ 
+                                                       
+`.green.bold);
 let dir;
 
 program
@@ -38,7 +45,7 @@ function downloadTemplate(answers) {
 			spinner.fail(err.message.red);
 		}
 		else {
-			spinner.succeed('工程模板创建完成'.green);
+			spinner.succeed('工程模板创建完成'.green.bold);
 			initProject(answers);
 		}
 	});
@@ -56,18 +63,21 @@ function initProject(answers) {
 		// 移除 git 的配置
 		shell.rm('-rf', `${sPath}/.git`);
 		let originCfg = JSON.parse(buffer);
-		Object.assign(originCfg, answers);
+		Object.assign(originCfg, {
+			version: '1.0.0',
+			author : process.env.USER
+		}, answers);
 		fs.writeFileSync(`${sPath}/package.json`, JSON.stringify(originCfg, null, 2));
-
-		spinner.succeed('初始化完成'.green);
+		spinner.succeed('初始化完成'.green.bold);
 		runDepend(sPath);
 	});
 }
 
 function runDepend(projectPath) {
-	spinner.start('安装中');
+	spinner.start('安装中'.blue);
 	shell.cd(dir);
-	shell.ls();
+	shell.exec('npm i', {silent: true});
+	spinner.succeed(`安装完成，${projectPath}`.green.bold);
 }
 
 if (!program.args.length) {
