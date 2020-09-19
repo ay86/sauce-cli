@@ -1,10 +1,10 @@
 {
-  "name": "sauce-cli",
+  "name": "@omooer/sauce",
   "version": "1.0.0",
   "description": "Sauce CLI",
   "main": "bin/index.js",
   "bin": {
-    "sauce-cli": "./bin/index.js"
+    "create-sauce": "./bin/index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,7 +14,10 @@
     "url": "git+https://github.com/ay86/sauce-cli.git"
   },
   "keywords": [
-    "sauce"
+    "sauce",
+    "admin portal",
+    "admin system",
+    "backstage system"
   ],
   "author": "AngusYoung",
   "license": "MIT",
