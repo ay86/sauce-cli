@@ -40,7 +40,8 @@ const questions = [
 		choices: [
 			{name: 'Vue 2 + SaUI', value: 'vue2', short: 'Vue 2'},
 			{name: 'Vue 3 + VbUI', value: 'vue3', short: 'Vue 3'}
-		]
+		],
+		default: 'vue3'
 	},
 	{
 		type   : 'confirm',
