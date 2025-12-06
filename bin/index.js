@@ -10,11 +10,12 @@ import { program } from 'commander';
 import shell from 'shelljs';
 import fs from 'node:fs';
 import path from 'node:path';
-import clone from 'download-git-repo';
+import simpleGit from 'simple-git';
 import inquirer from 'inquirer';
 import ora from 'ora';
 import 'console-colors-node';
 
+const git = simpleGit();
 const spinner = ora();
 
 const questions = [
@@ -102,15 +103,16 @@ async function downloadTemplate(dir, answers) {
 	}
 	spinner.start(`正在创建工程模板到${ dir }/`.blue);
 	const branch = answers.template === 'vue2' ? 'vue2old' : 'master';
-	clone(`github:ay86/Sauce#${ branch }`, dir, {clone: true}, function(err) {
-		if (err) {
-			handleError(err.message);
-		}
-		else {
-			spinner.info('工程模板创建完成'.blue.bold);
-			initProject(dir, answers);
-		}
-	});
+	git.clone(`git@github.com:ay86/Sauce.git`, dir, ['--branch', branch, '--single-branch']).then(
+			() => {
+				spinner.info('工程模板创建完成'.blue.bold);
+				initProject(dir, answers);
+			}
+	).catch(
+			err => {
+				handleError(err.message);
+			}
+	);
 }
 
 function initProject(dir, answers) {
@@ -131,6 +133,10 @@ function initProject(dir, answers) {
 			name       : answers.name,
 			description: answers.description,
 		});
+		// 删除原仓库的配置
+		delete originCfg.repository;
+		delete originCfg.bugs;
+		delete originCfg.homepage;
 		fs.writeFileSync(`${ projectPath }/package.json`, JSON.stringify(originCfg, null, 2));
 		spinner.info('初始化完成'.blue.bold);
 		runDepend(dir, projectPath);
