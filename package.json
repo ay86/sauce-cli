@@ -1,6 +1,6 @@
 {
 	"name": "@omooer/sauce",
-	"version": "1.5.0",
+	"version": "1.5.1",
 	"description": "Sauce CLI",
 	"type": "module",
 	"main": "bin/index.js",

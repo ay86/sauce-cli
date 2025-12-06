@@ -23,8 +23,5 @@ create-sauce <PROJECT_DIRECTORY>
 ```
 or
 ```npm
-npm create sauce <PROJECT_DIRECTORY>
-```
-```npm
-npx create-sauce <PROJECT_DIRECTORY>
+npx @omooer/sauce <PROJECT_DIRECTORY>
 ```
